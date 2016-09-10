@@ -51,21 +51,18 @@ with open(filename) as f:
         pprint(log_line_data ['request_url'],path)
         path_csv = path.getvalue().replace("\n","").replace("'", "")
         # path_csv = '/dvwa-1.9/dvwa/css/\"980610%40'
-        print path_csv
+        # print path_csv
         list = '%, ", ?, _, $, &, *, /, \\, \., \|'
         symbol_in_request = 0
         for i in range(0, len(path_csv)):
           if path_csv[i] in list:
             symbol_in_request +=1
-        # print symbol_in_request
-        P_symbol = float(symbol_in_request)/float(len(path_csv))
-        # print len(path_csv)
-        print P_symbol
-
+            x = float(len(path_csv))
+        p_symbol = symbol_in_request / x
         status = StringIO.StringIO()
         pprint(log_line_data['status'],status)
         status_csv = status.getvalue().replace("\n","").replace("'","")
         status_csv = float(status_csv)/100
         # print status_csv
-        outputWriter.writerow([ time_receivedcsv, method_csv, path_csv, status_csv, '1'])
+        outputWriter.writerow([ time_receivedcsv, method_csv, p_symbol, status_csv, '1'])
    ofile.close()
