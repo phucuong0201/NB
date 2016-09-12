@@ -23,7 +23,7 @@ with open(filename) as f:
         t0 = float(time_receivedcsv[0])
         t2 = float(time_receivedcsv[2:3])
         t5 = float(time_receivedcsv[5:6])
-        time_receivedcsv = (t0 * 3600 + t2* 60 + t5)/10000
+        time_receivedcsv = (t0 * 3600 + t2* 60 + t5)/86400
         # print time_receivedcsv
 
         method = StringIO.StringIO()
@@ -41,17 +41,17 @@ with open(filename) as f:
            method_csv = 4
         if method_csv == 'HEAD':
            method_csv = 5
-        if method_csv == 'OPTION':
+        if method_csv == 'OPTIONS':
            method_csv = 6
         if method_csv == 'TRACE':
            method_csv = 7
+        if method_csv == 'CONNECT':
+          method_csv = 8
         # print method_csv
 
         path = StringIO.StringIO()
         pprint(log_line_data ['request_url'],path)
         path_csv = path.getvalue().replace("\n","").replace("'", "")
-        # path_csv = '/dvwa-1.9/dvwa/css/\"980610%40'
-        # print path_csv
         list = '%, ", ?, _, $, &, *, /, \\, \., \|'
         symbol_in_request = 0
         for i in range(0, len(path_csv)):
@@ -62,7 +62,7 @@ with open(filename) as f:
         status = StringIO.StringIO()
         pprint(log_line_data['status'],status)
         status_csv = status.getvalue().replace("\n","").replace("'","")
-        status_csv = float(status_csv)/100
+        status_csv = float(status_csv)/500
         # print status_csv
         outputWriter.writerow([ time_receivedcsv, method_csv, p_symbol, status_csv, '0'])
    ofile.close()
