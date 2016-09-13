@@ -37,38 +37,3 @@ for line in reader:
 # print total_line
 # print Pattack
 # print Pnormal
-
-
-#Tinh toan xac suat cua method
-# filename = open ('log.csv' ,"r+")
-# reader = csv.reader(filename)
-# for line in reader:
-#     method = line[1]
-#     label = line[4]
-#     label_list = list(label)
-#     method_list = list(method)
-#     get_in_attack = 0
-#     post_in_attack = 0
-#     head_in_attack = 0
-#     delete_in_attack = 0
-#     put_in_attack = 0
-#     options_in_attack = 0
-#     trace_in_attack = 0
-#     connect_in_attack = 0
-#     # print method_list
-#     for x in label:
-#         if x == '1':
-#             if method == '0':
-#                 get_in_attack +=1
-#             # print get_in_attack
-#             if method == '1':
-#                 post_in_attack +=1
-#             # print post_in_attack
-#             if method == '2':
-#                 head_in_attack +=1
-#             # print head_in_attack
-#             if method == '3':
-#                 delete_in_method +=1
-#                 print delete_in_method
-
-
