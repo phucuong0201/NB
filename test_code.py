@@ -100,12 +100,11 @@ with open ("normal_log.csv", "r") as normallog:
 	    	trace_in_normal += 1
 	    if list_method[x] == '7':
 	    	connect_in_normal += 1
-	for line in normal_log_line:
-		list_status_code_normal.append(str(line[3]))
-	for x in range(len(list_status_code_normal)):
-		if list_status_code_normal == '0.4':
-			status_code_200_in_normal += 1
-print status_code_200_in_normal
+# 	for line in normal_log_line:
+# 		list_status_code_normal.append(str(line[2]))
+# 	for x in range(len(list_status_code_normal)):
+# 		count = Counter(list_status_code_normal)
+# print count 
 
 total_line = normal_log_row_count + attack_log_row_count
 
@@ -138,4 +137,4 @@ print ("Xac suat post trong attack la: ", Ppost_in_attack)
 print ("Xac suat get trong normal la: ", Pget_in_normal)
 print ("Xac suat post trong normal la", Ppost_in_normal)
 # pprint (Counter(list_method).values())
-pprint (Counter(list_status_code_normal))
+# pprint (Counter(list_status_code_normal))
