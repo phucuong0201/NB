@@ -6,21 +6,26 @@ from collections import Counter
 attack_line = 0
 normal_line = 0
 log_line = []
+classify_log_line = []
 query_list = []
 time_list_attack = []
 time_list_normal = []
+time_list_classify = []
 ptime_attack = []
 ptime_normal = []
 method_list_attack = []
 method_list_normal = []
+method_list_classify = []
 pmethod_attack = []
 pmethod_normal = []
 query_list_attack = []
 query_list_normal = []
+query_list_classify = []
 pquery_attack = []
 pquery_normal = []
 status_list_attack = []
 status_list_normal = []
+status_list_classify = []
 pstatus_attack = []
 pstatus_normal = []
 time_label_attack = []
@@ -69,7 +74,6 @@ count_query_attack_items = Counter(query_list_attack).items()
 count_status_attack = Counter(status_list_attack).values()  #status
 count_status_attack_items = Counter(status_list_attack).items()
 
-#xac suat cua truong thoi gian cho attack log va so sanh gia tri xac suat voi thoi gian tuong ung
 for i in count_time_attack:
     ptime_attack.append(float(i)/float(attack_line))
 for i in count_time_attack_items:         # fix 14.9
@@ -81,12 +85,11 @@ for i in time_list_attack:
             time_compare_attack.append(list_ptime_attack.values()[j])
 # pprint (time_compare_attack)
 # pprint(time_compare_attack)
-#xac suat cua truong method cho attack log va so sanh gia tri xac suat voi thoi gian tuong ug
 for i in count_method_attack:
     pmethod_attack.append(float(i)/float(attack_line))
-for i in count_method_attack_items:         # fix 14.9
+for i in count_method_attack_items:         
     method_label_attack.append(i[0])
-list_pmethod_attack = dict(zip(method_list_attack,pmethod_attack)) # fix 14.9
+list_pmethod_attack = dict(zip(method_list_attack,pmethod_attack)) 
 for i in method_list_attack:
     for j in range(len(list_pmethod_attack.keys())):
         if i == list_pmethod_attack.keys()[j]:
@@ -94,14 +97,14 @@ for i in method_list_attack:
 # pprint (method_compare_attack)
 for i in count_query_attack:
     pquery_attack.append(float(i)/float(attack_line))
-for i in count_query_attack_items:         # fix 14.9
+for i in count_query_attack_items:         
     query_label_attack.append(i[0])
 list_pquery_attack = dict(zip(query_list_attack,pquery_attack))
 for i in query_list_attack:
     for j in range(len(list_pquery_attack.keys())):
         if i == list_pquery_attack.keys()[j]:
             query_compare_attack.append(list_pquery_attack.values()[j])
-pprint(query_compare_attack)
+# pprint(query_compare_attack)
 
 for i in count_status_attack:
     pstatus_attack.append(float(i)/float(attack_line))
@@ -163,7 +166,6 @@ for i in query_list_normal:
         if i == list_pquery_normal.keys()[j]:
             query_compare_normal.append(list_pquery_normal.values()[j])
 # pprint(query_compare_normal)
-# pprint(query_list_normal)
 
 for i in count_status_normal:
     pstatus_normal.append(float(i)/float(normal_line))
@@ -174,4 +176,27 @@ for i in status_list_normal:
     for j in range(len(list_pstatus_code_normal.keys())):
         if i == list_pstatus_code_normal.keys()[j]:
             status_compare_normal.append(list_pstatus_code_normal.values()[j])
+# pprint(status_compare_normal)
+
 csv_normalfile.close()
+
+time = []
+with open('log_to_classify.csv' , "r+") as csv_logfile:
+    reader_classifylog = csv.reader(csv_logfile)
+    for line in reader_classifylog:
+        time_list_classify.append(str(line[0]))
+        method_list_classify.append(str(line[1]))
+        query_list_classify.append(str(line[2]))
+        status_list_classify.append(str(line[3]))
+        for line in time_list_classify:
+            for j in range(len(list_ptime_normal.keys())):
+                if i == list_ptime_normal.keys()[j]:
+                    time.append(list_ptime_normal.values()[j])
+
+pprint (time)
+pprint (list_ptime_normal)
+# pprint(time_list_classify)
+# pprint(status_list_classify)
+# pprint(query_list_classify)
+# pprint(time_list_classify)
+# pprint(method_list_classify)
