@@ -226,9 +226,9 @@ with open('log_to_classify.csv',"r+") as csv_logfile:
         group_plog = zip(pnormal, pattack)
     for i in group_plog:
         if i[0] > i[1]:
-            classify.append('Dong log khong bi tan cong')
+            classify.append('An toan')
         if i[0] < i[1]:
-            classify.append('Dong log bi tan cong')
+            classify.append('Bi tan cong')
 
     with open('log.txt', 'r+') as f:
         lines = []
