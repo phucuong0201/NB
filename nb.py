@@ -101,8 +101,6 @@ for i in query_list_attack:
     for j in range(len(list_pquery_attack.keys())):
         if i == list_pquery_attack.keys()[j]:
             query_compare_attack.append(list_pquery_attack.values()[j])
-# pprint(query_compare_attack)
-
 for i in count_status_attack:
     pstatus_attack.append(float(i)/float(attack_line))
 for i in count_status_attack_items:         # fix 14.9
@@ -159,8 +157,6 @@ for i in query_list_normal:
     for j in range(len(list_pquery_normal.keys())):
         if i == list_pquery_normal.keys()[j]:
             query_compare_normal.append(list_pquery_normal.values()[j])
-# pprint(query_compare_normal)
-
 for i in count_status_normal:
     pstatus_normal.append(float(i)/float(normal_line))
 for i in count_status_normal_items:        
@@ -170,8 +166,6 @@ for i in status_list_normal:
     for j in range(len(list_pstatus_code_normal.keys())):
         if i == list_pstatus_code_normal.keys()[j]:
             status_compare_normal.append(list_pstatus_code_normal.values()[j])
-# pprint(status_compare_normal)
-
 csv_normalfile.close()
 
 time_attack = []
@@ -210,7 +204,6 @@ with open('log_to_classify.csv',"r+") as csv_logfile:
         group_pnormal = zip(time_normal, method_normal, query_normal, status_code_normal)
         for i in group_pnormal:
             pnormal.append(i[0]*i[1]*i[2]*i[3])
-
 #xac suat dong log duoc phan loai thanh dong log bi tan cong
         for line in time_list_classify:
             for j in range(len(list_ptime_attack.keys())):
@@ -231,9 +224,10 @@ with open('log_to_classify.csv',"r+") as csv_logfile:
         group_pattack = zip(time_attack, method_attack, query_attack, status_code_attack)
         for i in group_pattack:
             pattack.append(i[0]*i[1]*i[2]*i[3])
-# pprint(pattack)
-# pprint(group_pattack)
-# pprint(pnormal)
-# pprint(method)
-# pprint(status_code_attack)
-# pprint (group_pnormal)
+
+        group_plog = zip(pnormal, pattack)
+        for i in group_plog:
+            if i[0] > i[1]:
+                pprint('Dong log khong bi tan cong')
+            elif i[0] < i[1]:
+                pprint('Dong log bi tan cong')
