@@ -83,8 +83,6 @@ for i in time_list_attack:
     for j in range(len(list_ptime_attack.keys())):
         if i == list_ptime_attack.keys()[j]:
             time_compare_attack.append(list_ptime_attack.values()[j])
-# pprint (time_compare_attack)
-# pprint(time_compare_attack)
 for i in count_method_attack:
     pmethod_attack.append(float(i)/float(attack_line))
 for i in count_method_attack_items:         
@@ -94,7 +92,6 @@ for i in method_list_attack:
     for j in range(len(list_pmethod_attack.keys())):
         if i == list_pmethod_attack.keys()[j]:
             method_compare_attack.append(list_pmethod_attack.values()[j])
-# pprint (method_compare_attack)
 for i in count_query_attack:
     pquery_attack.append(float(i)/float(attack_line))
 for i in count_query_attack_items:         
@@ -143,8 +140,6 @@ for i in time_list_normal:
     for j in range(len(list_ptime_normal.keys())):
         if i == list_ptime_normal.keys()[j]:
             time_compare_normal.append(list_ptime_normal.values()[j])
-# pprint (time_compare_normal)
-# pprint(time_compare_normal)
 #xac suat cua truong method cho normal log va so sanh gia tri xac suat voi thoi gian tuong ug
 for i in count_method_normal:
     pmethod_normal.append(float(i)/float(normal_line))
@@ -155,7 +150,6 @@ for i in method_list_normal:
     for j in range(len(list_pmethod_normal.keys())):
         if i == list_pmethod_normal.keys()[j]:
             method_compare_normal.append(list_pmethod_normal.values()[j])
-# pprint (method_compare_normal)
 for i in count_query_normal:
     pquery_normal.append(float(i)/float(normal_line))
 for i in count_query_normal_items:         
@@ -180,8 +174,17 @@ for i in status_list_normal:
 
 csv_normalfile.close()
 
-time = []
-with open('log_to_classify.csv' , "r+") as csv_logfile:
+time_attack = []
+method_attack = []
+query_attack = []
+status_code_attack = []
+pattack = []
+time_normal = []
+method_normal = []
+query_normal = []
+status_code_normal = []
+pnormal = []
+with open('log_to_classify.csv',"r+") as csv_logfile:
     reader_classifylog = csv.reader(csv_logfile)
     for line in reader_classifylog:
         time_list_classify.append(str(line[0]))
@@ -190,13 +193,47 @@ with open('log_to_classify.csv' , "r+") as csv_logfile:
         status_list_classify.append(str(line[3]))
         for line in time_list_classify:
             for j in range(len(list_ptime_normal.keys())):
-                if i == list_ptime_normal.keys()[j]:
-                    time.append(list_ptime_normal.values()[j])
+                if line == list_ptime_normal.keys()[j]:
+                    time_normal.append(list_ptime_normal.values()[j])
+        for line in method_list_classify:
+            for j in range(len(list_pmethod_normal.keys())):
+                if line == list_pmethod_normal.keys()[j]:
+                    method_normal.append(list_pmethod_normal.values()[j])
+        for line in query_list_classify:
+            for j in range(len(list_pquery_normal.keys())):
+                if line == list_pquery_normal.keys()[j]:
+                    query_normal.append(list_pquery_normal.values()[j])
+        for line in status_list_classify:
+            for j in range(len(list_pstatus_code_normal.keys())):
+                if line == list_pstatus_code_normal.keys()[j]:
+                    status_code_normal.append(list_pstatus_code_normal.values()[j])
+        group_pnormal = zip(time_normal, method_normal, query_normal, status_code_normal)
+        for i in group_pnormal:
+            pnormal.append(i[0]*i[1]*i[2]*i[3])
 
-pprint (time)
-pprint (list_ptime_normal)
-# pprint(time_list_classify)
-# pprint(status_list_classify)
-# pprint(query_list_classify)
-# pprint(time_list_classify)
-# pprint(method_list_classify)
+#xac suat dong log duoc phan loai thanh dong log bi tan cong
+        for line in time_list_classify:
+            for j in range(len(list_ptime_attack.keys())):
+                if line == list_ptime_attack.keys()[j]:
+                    time_attack.append(list_ptime_attack.values()[j])
+        for line in method_list_classify:
+            for j in range(len(list_pmethod_attack.keys())):
+                if line == list_pmethod_attack.keys()[j]:
+                    method_attack.append(list_pmethod_attack.values()[j])
+        for line in query_list_classify:
+            for j in range(len(list_pquery_attack.keys())):
+                if line == list_pquery_attack.keys()[j]:
+                    query_attack.append(list_pquery_attack.values()[j])
+        for line in status_list_classify:
+            for j in range(len(list_pstatus_code_attack.keys())):
+                if line == list_pstatus_code_attack.keys()[j]:
+                    status_code_attack.append(list_pstatus_code_attack.values()[j])
+        group_pattack = zip(time_attack, method_attack, query_attack, status_code_attack)
+        for i in group_pattack:
+            pattack.append(i[0]*i[1]*i[2]*i[3])
+# pprint(pattack)
+# pprint(group_pattack)
+# pprint(pnormal)
+# pprint(method)
+# pprint(status_code_attack)
+# pprint (group_pnormal)
